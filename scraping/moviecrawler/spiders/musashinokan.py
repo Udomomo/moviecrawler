@@ -19,7 +19,7 @@ class MusashinokanSpider(scrapy.Spider):
     def parse_topics(self, response):
         item=Headline()
         item["title"] = response.css(".movies-title b::text").extract()
-        item["body"] = response.css(".main.is-site-main .text-container .text p::text").extract()
+        item["body"] = response.css(".main.is-site-main .text-container .text b::text").extract()
         yield item        
 
         

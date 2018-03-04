@@ -19,7 +19,7 @@ class ImageforumSpider(scrapy.Spider):
     def parse_topics(self, response):
         item=Headline()
         item["title"] = response.css(".schedule-day-title.schedule-day-title3::text").extract()
-        item["body"] = response.css(".text.mbL::text").extract()
+        item["body"] = response.css(".text.mbL strong::text").extract()
         yield item        
 
         

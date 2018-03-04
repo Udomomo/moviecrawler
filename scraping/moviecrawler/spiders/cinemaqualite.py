@@ -19,7 +19,7 @@ class CinemaQualiteSpider(scrapy.Spider):
     def parse_topics(self, response):
         item=Headline()
         item["title"] = response.css(".text.is-single-title h1 b::text").extract()
-        item["body"] = response.css("#container>.section .text-container .text p::text").extract()
+        item["body"] = response.css("#container>.section .text-container .text b::text").extract()
         yield item        
 
         
