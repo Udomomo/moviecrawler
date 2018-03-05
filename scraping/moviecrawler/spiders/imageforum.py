@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from . import makeBody
 
 from moviecrawler.items import Headline 
 
@@ -18,8 +19,9 @@ class ImageforumSpider(scrapy.Spider):
 
     def parse_topics(self, response):
         item=Headline()
-        item["title"] = response.css(".schedule-day-title.schedule-day-title3::text").extract()
-        item["body"] = response.css(".text.mbL strong::text").extract()
-        yield item        
+        title = response.css(".schedule-day-title.schedule-day-title3::text").extract_first()
+        body = response.css(".text.mbL strong::text").extract()
 
-        
+        item["title"] = makeBody.replacespace(title)
+        item["body"] = makeBody.replacespace(makeBody.joinlist(body))
+        yield item
